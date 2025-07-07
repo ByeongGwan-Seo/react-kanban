@@ -19,5 +19,5 @@
 [25/07/07]
 - ~UI refinement and cleanup~
 - save kanban status on local storage
-- Add board creation form  
+- ~Add board creation form and logic~ 
 - ~Implement task deletion functionality~
