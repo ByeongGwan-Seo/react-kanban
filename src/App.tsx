@@ -4,7 +4,21 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { toDoState } from "./atoms";
 import Board from "./components/Board";
+import { AiFillPlusCircle } from "react-icons/ai";
 
+const PlusIcon = AiFillPlusCircle as unknown as React.FC<
+  React.SVGProps<SVGSVGElement>
+>;
+
+const PlusBtn = styled(PlusIcon)`
+  font-size: 48px;
+  color: whitesmoke;
+
+  &:hover {
+    font-size: 56px;
+    transition: font-size 0.2s linear;
+  }
+`;
 const Wrapper = styled.div`
   display: flex;
   max-width: 700px;
@@ -13,6 +27,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
+  gap: 30px;
 `;
 
 const Boards = styled.div`
@@ -21,8 +36,17 @@ const Boards = styled.div`
   grid-template-columns: repeat(3, 1fr);
 `;
 
+const AddBtnWrapper = styled.div`
+  display: inherit;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+`;
+
 function App() {
   const [toDos, setToDos] = useRecoilState(toDoState);
+
   const onDragEnd = (info: DropResult) => {
     const { destination, draggableId, source } = info;
     if (!destination) return;
@@ -62,6 +86,9 @@ function App() {
             <Board boardId={boardId} key={boardId} toDos={toDos[boardId]} />
           ))}
         </Boards>
+        <AddBtnWrapper>
+          <PlusBtn />
+        </AddBtnWrapper>
       </Wrapper>
     </DragDropContext>
   );
