@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { toDoState } from "./atoms";
 import Board from "./components/Board";
@@ -41,8 +41,38 @@ const AddBtnWrapper = styled.div`
   display: inherit;
   justify-content: center;
   align-items: center;
-
   cursor: pointer;
+`;
+
+const AddBoardForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  background-color: whitesmoke;
+  padding: 24px;
+
+  input {
+    padding: 12px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    margin-bottom: 12px;
+    transition: border-color 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: ${(props) => props.theme.bgColor};
+    }
+  }
+
+  button {
+    border: none;
+    border-radius: 10px;
+    padding: 8px;
+    background-color: #74b9ff;
+    font-size: 12px;
+    cursor: pointer;
+  }
 `;
 
 function App() {
@@ -51,7 +81,7 @@ function App() {
   const [newBoardName, setNewBoardName] = useState("");
 
   const onDragEnd = (info: DropResult) => {
-    const { destination, draggableId, source } = info;
+    const { destination, source } = info;
     if (!destination) return;
     if (destination?.droppableId === source.droppableId) {
       setToDos((allBoards) => {
@@ -106,7 +136,7 @@ function App() {
           ))}
         </Boards>
         {isAddingBoard ? (
-          <form
+          <AddBoardForm
             onSubmit={(e) => {
               e.preventDefault();
               handleAddBoard();
@@ -119,7 +149,7 @@ function App() {
               autoFocus
             />
             <button type="submit">Create</button>
-          </form>
+          </AddBoardForm>
         ) : (
           <AddBtnWrapper onClick={() => setIsAddingBoard(true)}>
             <PlusBtn />

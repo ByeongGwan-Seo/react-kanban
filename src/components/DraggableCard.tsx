@@ -1,7 +1,6 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
-import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const Card = styled.div.withConfig({
   shouldForwardProp: (prop) => prop !== "isDragging",
@@ -51,10 +50,6 @@ function DraggableCard({
   index,
   handleDelete,
 }: IDraggableCardProps) {
-  const Icon = AiOutlineCloseCircle as unknown as React.FC<
-    React.SVGProps<SVGSVGElement>
-  >;
-
   return (
     <Draggable draggableId={toDoId + ""} index={index}>
       {(provided, snapshot) => (
