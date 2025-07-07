@@ -89,6 +89,18 @@ function Board({ toDos, boardId }: IBoardProps) {
     setValue("toDo", "");
   };
 
+  const handleDelete = (toDoId: number) => {
+    setToDos((allBoards) => {
+      const updatedBoard = allBoards[boardId].filter(
+        (toDo) => toDo.id !== toDoId
+      );
+      return {
+        ...allBoards,
+        [boardId]: updatedBoard,
+      };
+    });
+  };
+
   return (
     <Wrapper>
       <Title>{boardId}</Title>
@@ -113,6 +125,7 @@ function Board({ toDos, boardId }: IBoardProps) {
                 index={index}
                 toDoId={toDo.id}
                 toDoText={toDo.text}
+                handleDelete={() => handleDelete(toDo.id)}
               />
             ))}
             {provided.placeholder}
