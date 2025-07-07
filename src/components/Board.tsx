@@ -40,20 +40,29 @@ const Area = styled.div.withConfig({
       : "transparent"};
   flex-grow: 1;
   transition: background-color 0.3s ease-in-out;
-  padding: 20px;
+  padding: 10px 0px;
 `;
 
 const Form = styled.form`
   width: 100%;
-  background-color: teal;
   margin: 12px 0px;
+  overflow: hidden;
 
   input {
     width: 100%;
     padding: 12px 6px;
+    border-color: transparent;
+    border-radius: 5px;
     font-size: 16px;
+    outline: none;
+
+    &:focus {
+      border-color: ${(props) => props.theme.bgColor};
+      transition: border-color 0.3s linear;
+    }
   }
 `;
+
 interface IBoardProps {
   toDos: ITodo[];
   boardId: string;
