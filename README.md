@@ -17,6 +17,6 @@
 ### 3. Upcoming Features (To-Do)
 [25/07/07]
 - ~UI refinement and cleanup~
-- save kanban status with local-storage
+- save kanban status on local storage
 - Add board creation form  
 - ~Implement task deletion functionality~
