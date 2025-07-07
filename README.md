@@ -15,6 +15,7 @@
 #### Form Management
 - react-hook-form
 ### 3. Upcoming Features (To-Do)
+[25/07/07]
 - UI refinement and cleanup
 - save kanban status with local-storage
 - Add board creation form  
