@@ -10,6 +10,7 @@
 #### UI
 - react-beautiful-dnd(i know it's deprecated...)
 - styled-components
+- react/icons
 #### State Management
 - Recoil
 #### Form Management
