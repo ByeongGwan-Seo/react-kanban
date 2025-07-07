@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { toDoState } from "./atoms";
 import Board from "./components/Board";
@@ -46,6 +46,8 @@ const AddBtnWrapper = styled.div`
 
 function App() {
   const [toDos, setToDos] = useRecoilState(toDoState);
+  const [isAddingBoard, setIsAddingBoard] = useState(false);
+  const [newBoardName, setNewBoardName] = useState("");
 
   const onDragEnd = (info: DropResult) => {
     const { destination, draggableId, source } = info;
@@ -78,6 +80,22 @@ function App() {
     }
   };
 
+  const handleAddBoard = () => {
+    if (!newBoardName.trim()) return;
+    const currentBoards = Object.keys(toDos);
+    if (currentBoards.length > 8) {
+      return;
+    }
+    setToDos((allBoards) => {
+      return { ...allBoards, [newBoardName]: [] };
+    });
+
+    console.log(currentBoards.length);
+
+    setIsAddingBoard(false);
+    setNewBoardName("");
+  };
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Wrapper>
@@ -86,9 +104,26 @@ function App() {
             <Board boardId={boardId} key={boardId} toDos={toDos[boardId]} />
           ))}
         </Boards>
-        <AddBtnWrapper>
-          <PlusBtn />
-        </AddBtnWrapper>
+        {isAddingBoard ? (
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleAddBoard();
+            }}
+          >
+            <input
+              value={newBoardName}
+              onChange={(e) => setNewBoardName(e.target.value)}
+              placeholder="New board name"
+              autoFocus
+            />
+            <button type="submit">Create</button>
+          </form>
+        ) : (
+          <AddBtnWrapper onClick={() => setIsAddingBoard(true)}>
+            <PlusBtn />
+          </AddBtnWrapper>
+        )}
       </Wrapper>
     </DragDropContext>
   );
