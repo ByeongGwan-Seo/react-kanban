@@ -20,7 +20,6 @@ const Wrapper = styled.div`
 const Title = styled.h2`
   text-align: center;
   font-weight: 600;
-  margin-bottom: 10px;
   font-size: 18px;
 `;
 
@@ -46,6 +45,14 @@ const Area = styled.div.withConfig({
 
 const Form = styled.form`
   width: 100%;
+  background-color: teal;
+  margin: 12px 0px;
+
+  input {
+    width: 100%;
+    padding: 12px 6px;
+    font-size: 16px;
+  }
 `;
 interface IBoardProps {
   toDos: ITodo[];
@@ -73,7 +80,6 @@ function Board({ toDos, boardId }: IBoardProps) {
     setValue("toDo", "");
   };
 
-  console.log("board has been rendered");
   return (
     <Wrapper>
       <Title>{boardId}</Title>
@@ -81,7 +87,7 @@ function Board({ toDos, boardId }: IBoardProps) {
         <input
           {...register("toDo", { required: true })}
           type="text"
-          placeholder={`Add task on ${boardId}`}
+          placeholder={`Add your task Here`}
         />
       </Form>
       <Droppable droppableId={boardId}>
