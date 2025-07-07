@@ -26,7 +26,8 @@ const Wrapper = styled.div`
   margin: 0 auto;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  max-height: 300vh;
   gap: 30px;
 `;
 
